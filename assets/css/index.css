@@ -93,7 +93,7 @@ main{
     height: fit-content;
     align-items: center;
     gap: 1rem;
-    flex-direction: row; /* Adicionado */
+    flex-direction: row;
 }
 
 .myList > div{
@@ -119,14 +119,14 @@ main{
 .results {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap; /* Permite que os itens quebrem linha quando necessário */
-    justify-content: flex-start; /* Alinha os cards à esquerda */
-    gap: 1rem; /* Espaçamento entre os cards */
-    padding: 2rem; /* Espaçamento interno */
+    flex-wrap: wrap; 
+    justify-content: flex-start; 
+    gap: 1rem; 
+    padding: 2rem; 
 }
 
 .nome-img {
-    width: 230px; /* Define a largura de cada card */
+    width: 230px; 
     background-color: #fff;
     border-radius: 10px;
     padding: 1rem;
@@ -151,7 +151,7 @@ main{
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    flex-direction: row; /* Adicionado */
+    flex-direction: row;
 }
 
 .pages{
@@ -159,8 +159,9 @@ main{
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    flex-direction: row; /* Adicionado */
+    flex-direction: row; 
     padding: 2rem;
+    ;
 }
 
 .pages > a button, button{
@@ -173,4 +174,25 @@ main{
     font-family: 'Berkshire Swash', sans-serif;
     font-size: 1.5rem;
     
+}
+
+.add-button {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    background-color: pink;
+    justify-content: center;
+    color: #fff;
+    font-size: 3rem;
+    bottom: 20%; 
+    right: 34.5%;
+}
+
+
+.nome-img:hover .add-button {
+    opacity: 1;
 }
