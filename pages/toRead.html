@@ -11,7 +11,7 @@
 
     <nav>
         <img src="../assets/imgs/favicon.png" alt="Icon">
-        <h1>Bloom Shelf</h1>
+        <a href="../pages/index.html"><h1>Bloom Shelf</h1></a>
     </nav>
     
     <section class="search-bar">
@@ -27,14 +27,23 @@
 
        <section class="myList">
         <div></div>
-        <button>Minha lista</button>
+        <p>Minha lista</p>
         <div></div>
        </section>
+       <section class="pages">
+        <a href="./toRead.html"><button><img src="" alt="">To-Read List</button></a>
+        <a href="./favs.html"><button><img src="" alt="">Favoritos</button></a>
+        <button id="recomendations">Recomendações</button>
+      
 
-       <section class="results">
-        <div> Adicionar livros </div>
-        <div id="resultado"></div>
-         </section>
+       </section>
+
+       <section class="resultSearch">
+        <div id="results"></div>
+       <div id="resultado"></div>
+       </section>
+
+       
 
     </main>
     <script src="index.js"></script>

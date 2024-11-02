@@ -5,19 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bloom Shelf</title>
     <link rel="stylesheet" href="../assets/css/index.css">
-    <link rel="stylesheet" href="../assets/css/results.css">
     <link rel="shortcut icon" href="../assets/imgs/favicon.png" type="image/x-icon">
 </head>
 <body>
 
     <nav>
         <img src="../assets/imgs/favicon.png" alt="Icon">
-       <a href="./index.html"> <h1>Bloom Shelf</h1></a>
+        <a href="../pages/index.html"><h1>Bloom Shelf</h1></a>
     </nav>
-
-    <section class="search-results">
-        <div id="resultado"></div> <!-- Container para os resultados da busca -->
-    </section>
     
     <section class="search-bar">
         <h2>Bloom Shelf</h2>
@@ -32,13 +27,24 @@
 
        <section class="myList">
         <div></div>
-        <p>Resultados</p>
+        <p>Minha lista</p>
         <div></div>
        </section>
+       <section class="pages">
+        <a href="./toRead.html"><button><img src="" alt="">To-Read List</button></a>
+        <a href="./favs.html"><button><img src="" alt="">Favoritos</button></a>
+        <button id="recomendations">Recomendações</button>
+      
 
-       <section class="results">
-            <div id="resultado"></div>
-        </section>
+       </section>
+
+       <section class="resultSearch">
+        <div id="results"></div>
+       <div id="resultado"></div>
+       </section>
+
+       
+
     </main>
     <script src="index.js"></script>
 </body>
