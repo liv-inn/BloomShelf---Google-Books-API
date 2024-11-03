@@ -117,13 +117,13 @@ main{
     width: 10%;
 }
 
-.results {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap; 
-    justify-content: flex-start; 
- 
-   
+#results {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); 
+    gap: 24px; 
+    max-width: 1200px; 
+    justify-content: center;
+    padding-bottom: 60px;
 }
 
 .nome-img {
@@ -146,11 +146,11 @@ main{
     margin: 0.2rem 0;
 }
 
-.resultado{
+#resultado {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
-    flex-direction: row;
+    gap: 2rem; 
 }
 
 .pages{
@@ -220,16 +220,6 @@ main{
    
 }
 
-
-#results {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr); /* Cria 6 colunas com largura igual */
-    gap: 24px; /* Espaçamento entre os itens */
-    max-width: 1200px; /* Defina uma largura máxima para o contêiner */
-    justify-content: center;
-  
-}
-
 .nome-img {
     background-color: #f4f4f4; /* Exemplo de estilo para o card */
     padding: 10px;
@@ -237,15 +227,6 @@ main{
     text-align: center;
     overflow: hidden;
 }
-
-#resultado {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem; /* Espaço entre os cards */
-}
-
-
 
 a{
     text-decoration: none;

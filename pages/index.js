@@ -83,10 +83,6 @@ function mostrarLivros(livros) {
         livroAutor.textContent = `Autor(es): ${authors ? authors.join(', ') : 'Desconhecido'}`;
         livroCard.appendChild(livroAutor);
 
-        const bttnDelete = document.createElement('button');
-        bttnDelete.classList.add('delete-button');
-        bttnDelete.textContent = 'Remover';
-        livroCard.appendChild(bttnDelete);
 
         resultadoContainer.appendChild(livroCard);
 
@@ -112,7 +108,6 @@ function mostrarLivros(livros) {
                 localStorage.setItem('myFavList', JSON.stringify(myFavList));
                 console.log('myFavList salva no localStorage:', JSON.parse(localStorage.getItem('myFavList')));
                 bttnFavorite.innerHTML = '<img src="../assets/imgs/favoritado.png" alt="Favoritado" />';
-
             }
         });
 
@@ -130,12 +125,29 @@ function mostrarLivros(livros) {
             });
         }
 
-        bttnDelete.addEventListener('click', function() {
-            myList = myList.filter(item => item.title !== title);
-            localStorage.setItem('myList', JSON.stringify(myList));
-            resultadoContainer.removeChild(livroCard);
-            console.log('Livro removido da lista:', title);
-        });
+        if (currentURL.includes('favs.html')){
+
+            bttnFavorite.innerHTML = '<img src="../assets/imgs/favoritado.png" alt="Favoritado" />';
+        }
+
+        if (currentURL.includes('toRead.html') || currentURL.includes('favs.html')) {
+            const bttnDelete = document.createElement('button');
+            bttnDelete.classList.add('delete-button');
+            bttnDelete.textContent = 'Remover';
+            livroCard.appendChild(bttnDelete);
+
+            bttnDelete.addEventListener('click', function() {
+                if (currentURL.includes('toRead.html')) {
+                    myList = myList.filter(item => item.title !== title);
+                    localStorage.setItem('myList', JSON.stringify(myList));
+                } else if (currentURL.includes('favs.html')) {
+                    myFavList = myFavList.filter(item => item.title !== title);
+                    localStorage.setItem('myFavList', JSON.stringify(myFavList));
+                }
+                resultadoContainer.removeChild(livroCard);
+                console.log('Livro removido da lista:', title);
+            });
+        }
     });
 }
 
