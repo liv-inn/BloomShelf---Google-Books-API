@@ -111,6 +111,9 @@ function mostrarLivros(livros) {
             }
         });
 
+        // ---------------- colocar o butão de add n a busca e recomendações apenas ---------------------
+        // ---------------------------------------------------
+
         if(currentURL.includes('toRead.html')) {
             const bttnMarkAsRead = document.createElement('button');
             bttnMarkAsRead.classList.add('mark-as-read-button');
