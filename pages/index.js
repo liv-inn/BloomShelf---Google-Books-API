@@ -16,16 +16,16 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Lista recuperada do localStorage:', savedList);
     console.log('Lista de favoritos recuperada do localStorage:', savedFavList);
     //-------------- add lista de lidos ---------------------------
-    console.log('Lista de livros lidos recuperada do localStorage:', savedMyReadings);
+    console.log('Lista de books lidos recuperada do localStorage:', savedMyReadings);
     //---------------------------------------------------------
 
     if (currentURL.includes('toRead.html')) {
-        mostrarLivros(savedList);
+        showBooks(savedList);
     } else if (currentURL.includes('favs.html')) {
-        mostrarLivros(savedFavList);
+        showBooks(savedFavList);
     } // --------------- add lista de lido ----------------------
     else if(currentURL.includes('read.html')) {
-        mostrarLivros(savedMyReadings);
+        showBooks(savedMyReadings);
     }
     //-------------------------------------------------------------
 });
@@ -40,9 +40,9 @@ function fetchBooks(searchTerm) {
         })
         .then(data => {
             if (data.items) {
-                mostrarLivros(data.items);
+                showBooks(data.items);
             } else {
-                console.log('Nenhum livro encontrado.');
+                console.log('Nenhum book encontrado.');
             }
         })
         .catch(error => console.error('Erro na requisição:', error));
@@ -59,52 +59,52 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
     }
 });
 
-function mostrarLivros(livros) {
-    const resultadoContainer = document.getElementById('results');
-    resultadoContainer.innerHTML = '';
+function showBooks(books) {
+    const containerResults = document.getElementById('results');
+    containerResults.innerHTML = '';
 
-    livros.forEach(livro => {
-        const volumeInfo = livro.volumeInfo || livro;
+    books.forEach(book => {
+        const volumeInfo = book.volumeInfo || book;
         const { title, authors, imageLinks } = volumeInfo;
 
-        const livroCard = document.createElement('div');
-        livroCard.classList.add('nome-img');
+        const bookCard = document.createElement('div');
+        bookCard.classList.add('nome-img');
 
-        const livroImagem = document.createElement('img');
-        livroImagem.classList.add('img-livro');
-        livroImagem.src = imageLinks ? imageLinks.thumbnail : '../assets/imgs/erro-img.png';
-        livroImagem.alt = `Capa do livro ${title || 'Desconhecido'}`;
-        livroCard.appendChild(livroImagem);
+        const bookImage = document.createElement('img');
+        bookImage.classList.add('img-book');
+        bookImage.src = imageLinks ? imageLinks.thumbnail : '../assets/imgs/erro-img.png';
+        bookImage.alt = `Capa do book ${title || 'Desconhecido'}`;
+        bookCard.appendChild(bookImage);
 
         const bttnAdd = document.createElement('button');
         bttnAdd.classList.add('add-button');
         bttnAdd.textContent = '+';
-        livroCard.appendChild(bttnAdd);
+        bookCard.appendChild(bttnAdd);
 
         const bttnFavorite = document.createElement('button');
         bttnFavorite.classList.add('favorite-button');
         bttnFavorite.innerHTML = '<img src="../assets/imgs/favoritar.png" alt="Favoritar" />';
-        livroCard.appendChild(bttnFavorite);
+        bookCard.appendChild(bttnFavorite);
 
-        const livroTitulo = document.createElement('p');
-        livroTitulo.classList.add('nome-livro');
-        livroTitulo.textContent = title || 'Título não disponível';
-        livroCard.appendChild(livroTitulo);
+        const bookTitle = document.createElement('p');
+        bookTitle.classList.add('nome-book');
+        bookTitle.textContent = title || 'Título não disponível';
+        bookCard.appendChild(bookTitle);
 
-        const livroAutor = document.createElement('p');
-        livroAutor.classList.add('nome-autor');
-        livroAutor.textContent = `Autor(es): ${authors ? authors.join(', ') : 'Desconhecido'}`;
-        livroCard.appendChild(livroAutor);
+        const bookAuthor = document.createElement('p');
+        bookAuthor.classList.add('nome-autor');
+        bookAuthor.textContent = `Autor(es): ${authors ? authors.join(', ') : 'Desconhecido'}`;
+        bookCard.appendChild(bookAuthor);
 
 
-        resultadoContainer.appendChild(livroCard);
+        containerResults.appendChild(bookCard);
 
 
         bttnAdd.addEventListener('click', function() {
-            const livroExiste = myList.some(item => item.title === title);
+            const bookExist = myList.some(item => item.title === title);
             
-            if (livroExiste) {
-                alert('Este livro já está na lista.');
+            if (bookExist) {
+                alert('Este book já está na lista.');
             } else {
                 myList.push({ title, authors, imageLinks });
                 localStorage.setItem('myList', JSON.stringify(myList));
@@ -113,10 +113,10 @@ function mostrarLivros(livros) {
         });
 
         bttnFavorite.addEventListener('click', function() {
-            const livroFavorito = myFavList.some(item => item.title === title);
+            const bookFavorite = myFavList.some(item => item.title === title);
             
-            if (livroFavorito) {
-                alert('Este livro já está na lista de favoritos.');
+            if (bookFavorite) {
+                alert('Este book já está na lista de favoritos.');
             } else {
                 myFavList.push({ title, authors, imageLinks });
                 localStorage.setItem('myFavList', JSON.stringify(myFavList));
@@ -125,20 +125,17 @@ function mostrarLivros(livros) {
             }
         });
 
-
-    
-
         if(currentURL.includes('toRead.html')) {
             const bttnMarkAsRead = document.createElement('button');
             bttnMarkAsRead.classList.add('mark-as-read-button');
             bttnMarkAsRead.textContent = 'Marcar como lido';
-            livroCard.appendChild(bttnMarkAsRead);
+            bookCard.appendChild(bttnMarkAsRead);
 
             bttnMarkAsRead.addEventListener('click', function() {
                 myList = myList.filter(item => item.title !== title);
                 localStorage.setItem('myList', JSON.stringify(myList));
-                resultadoContainer.removeChild(livroCard);
-                console.log('Livro marcado como lido:', title);
+                containerResults.removeChild(bookCard);
+                console.log('book marcado como lido:', title);
 
                 // ------------- add no lidos ---------------------------
                 myReadings.push({ title, authors, imageLinks });
@@ -146,12 +143,9 @@ function mostrarLivros(livros) {
                 console.log('myReadings salva no localStorage:', JSON.parse(localStorage.getItem('myReadings')));
                 //--------------------------------------------------------
             });
-            
         }
 
-
         if (currentURL.includes('favs.html')){
-
             bttnFavorite.innerHTML = '<img src="../assets/imgs/favoritado.png" alt="Favoritado" />';
         }
 
@@ -159,7 +153,7 @@ function mostrarLivros(livros) {
             const bttnDelete = document.createElement('button');
             bttnDelete.classList.add('delete-button');
             bttnDelete.textContent = 'Remover';
-            livroCard.appendChild(bttnDelete);
+            bookCard.appendChild(bttnDelete);
 
             bttnDelete.addEventListener('click', function() {
                 if (currentURL.includes('toRead.html')) {
@@ -173,8 +167,8 @@ function mostrarLivros(livros) {
                     myReadings = myReadings.filter(item => item.title !== title);
                     localStorage.setItem('myFavList', JSON.stringify(myReadings));
                 }
-                resultadoContainer.removeChild(livroCard);
-                console.log('Livro removido da lista:', title);
+                containerResults.removeChild(bookCard);
+                console.log('book removido da lista:', title);
             });
         }
     });
@@ -195,7 +189,7 @@ function fetchRecommendations() {
                     allBooks.push(...data.items);
                 }
             });
-            mostrarLivros(allBooks);
+            showBooks(allBooks);
         })
         .catch(error => console.error('Erro ao buscar recomendações:', error));
 }
