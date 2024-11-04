@@ -1,20 +1,33 @@
 const API_KEY = 'AIzaSyA2eEhMrItpWYVgmDjMLxZJEV7paDjL1HA';
 let myList = JSON.parse(localStorage.getItem('myList')) || [];
 let myFavList = JSON.parse(localStorage.getItem('myFavList')) || [];
+//-------------------------add lista de lidos -------------------------------
+let myReadings = JSON.parse(localStorage.getItem('myReadings')) || [];
+//-----------------------------------------------------------
 const currentURL = window.location.href;
 
 document.addEventListener('DOMContentLoaded', () => {
     const savedList = JSON.parse(localStorage.getItem('myList')) || [];
     const savedFavList = JSON.parse(localStorage.getItem('myFavList')) || [];
+// -------------------- add lista de lidos ----------------------------
+    const savedMyReadings = JSON.parse(localStorage.getItem('myReadings')) || [];
+//---------------------------------------------------------------------
 
     console.log('Lista recuperada do localStorage:', savedList);
     console.log('Lista de favoritos recuperada do localStorage:', savedFavList);
+    //-------------- add lista de lidos ---------------------------
+    console.log('Lista de livros lidos recuperada do localStorage:', savedMyReadings);
+    //---------------------------------------------------------
 
     if (currentURL.includes('toRead.html')) {
         mostrarLivros(savedList);
     } else if (currentURL.includes('favs.html')) {
         mostrarLivros(savedFavList);
+    } // --------------- add lista de lido ----------------------
+    else if(currentURL.includes('read.html')) {
+        mostrarLivros(savedMyReadings);
     }
+    //-------------------------------------------------------------
 });
 
 function fetchBooks(searchTerm) {
@@ -86,9 +99,10 @@ function mostrarLivros(livros) {
 
         resultadoContainer.appendChild(livroCard);
 
+
         bttnAdd.addEventListener('click', function() {
             const livroExiste = myList.some(item => item.title === title);
-
+            
             if (livroExiste) {
                 alert('Este livro já está na lista.');
             } else {
@@ -111,8 +125,8 @@ function mostrarLivros(livros) {
             }
         });
 
-        // ---------------- colocar o butão de add n a busca e recomendações apenas ---------------------
-        // ---------------------------------------------------
+
+    
 
         if(currentURL.includes('toRead.html')) {
             const bttnMarkAsRead = document.createElement('button');
@@ -125,15 +139,23 @@ function mostrarLivros(livros) {
                 localStorage.setItem('myList', JSON.stringify(myList));
                 resultadoContainer.removeChild(livroCard);
                 console.log('Livro marcado como lido:', title);
+
+                // ------------- add no lidos ---------------------------
+                myReadings.push({ title, authors, imageLinks });
+                localStorage.setItem('myReadings', JSON.stringify(myReadings));
+                console.log('myReadings salva no localStorage:', JSON.parse(localStorage.getItem('myReadings')));
+                //--------------------------------------------------------
             });
+            
         }
+
 
         if (currentURL.includes('favs.html')){
 
             bttnFavorite.innerHTML = '<img src="../assets/imgs/favoritado.png" alt="Favoritado" />';
         }
 
-        if (currentURL.includes('toRead.html') || currentURL.includes('favs.html')) {
+        if (currentURL.includes('toRead.html') || currentURL.includes('favs.html') || currentURL.includes('read.html')) { // página de lidos
             const bttnDelete = document.createElement('button');
             bttnDelete.classList.add('delete-button');
             bttnDelete.textContent = 'Remover';
@@ -146,6 +168,10 @@ function mostrarLivros(livros) {
                 } else if (currentURL.includes('favs.html')) {
                     myFavList = myFavList.filter(item => item.title !== title);
                     localStorage.setItem('myFavList', JSON.stringify(myFavList));
+                } // tirar do cache de lidos
+                else if(currentURL.includes('read.html')){
+                    myReadings = myReadings.filter(item => item.title !== title);
+                    localStorage.setItem('myFavList', JSON.stringify(myReadings));
                 }
                 resultadoContainer.removeChild(livroCard);
                 console.log('Livro removido da lista:', title);
