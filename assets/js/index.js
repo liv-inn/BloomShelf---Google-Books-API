@@ -34,7 +34,7 @@ function fetchBooks(searchTerm) {
             if (data.items) {
                 showBooks(data.items);
             } else {
-                console.log('Nenhum book encontrado.');
+                console.log('Nenhum livro encontrado.');
             }
         })
         .catch(error => console.error('Erro na requisição:', error));
@@ -107,7 +107,7 @@ function showBooks(books) {
             const bookFavorite = myFavList.some(item => item.title === title);
             
             if (bookFavorite) {
-                alert('Este book já está na lista de favoritos.');
+                alert('Este livro já está na lista de favoritos.');
             } else {
                 myFavList.push({ title, authors, imageLinks });
                 localStorage.setItem('myFavList', JSON.stringify(myFavList));

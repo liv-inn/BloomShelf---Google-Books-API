@@ -141,14 +141,14 @@ main{
     text-align: center;
 }
 
-.img-livro {
+.img-book {
     width:200px;
     height: 250px;
     border-radius: 8px;
     
 }
 
-.nome-livro, .nome-autor {
+.nome-book, .nome-autor {
     font-size: 1.5rem;
     margin: 0.2rem 0;
 }
