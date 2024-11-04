@@ -1,33 +1,25 @@
 const API_KEY = 'AIzaSyA2eEhMrItpWYVgmDjMLxZJEV7paDjL1HA';
 let myList = JSON.parse(localStorage.getItem('myList')) || [];
 let myFavList = JSON.parse(localStorage.getItem('myFavList')) || [];
-//-------------------------add lista de lidos -------------------------------
 let myReadings = JSON.parse(localStorage.getItem('myReadings')) || [];
-//-----------------------------------------------------------
+
+
 const currentURL = window.location.href;
 
 document.addEventListener('DOMContentLoaded', () => {
     const savedList = JSON.parse(localStorage.getItem('myList')) || [];
     const savedFavList = JSON.parse(localStorage.getItem('myFavList')) || [];
-// -------------------- add lista de lidos ----------------------------
     const savedMyReadings = JSON.parse(localStorage.getItem('myReadings')) || [];
-//---------------------------------------------------------------------
 
-    console.log('Lista recuperada do localStorage:', savedList);
-    console.log('Lista de favoritos recuperada do localStorage:', savedFavList);
-    //-------------- add lista de lidos ---------------------------
-    console.log('Lista de books lidos recuperada do localStorage:', savedMyReadings);
-    //---------------------------------------------------------
-
-    if (currentURL.includes('toRead.html')) {
+    if (currentURL.includes('to-read.html')) {
         showBooks(savedList);
     } else if (currentURL.includes('favs.html')) {
         showBooks(savedFavList);
-    } // --------------- add lista de lido ----------------------
+    } 
     else if(currentURL.includes('read.html')) {
         showBooks(savedMyReadings);
     }
-    //-------------------------------------------------------------
+   
 });
 
 function fetchBooks(searchTerm) {
@@ -125,7 +117,7 @@ function showBooks(books) {
             }
         });
 
-        if(currentURL.includes('toRead.html')) {
+        if(currentURL.includes('to-read.html')) {
             const bttnMarkAsRead = document.createElement('button');
             bttnMarkAsRead.classList.add('mark-as-read-button');
             bttnMarkAsRead.textContent = 'Marcar como lido';
@@ -136,12 +128,11 @@ function showBooks(books) {
                 localStorage.setItem('myList', JSON.stringify(myList));
                 containerResults.removeChild(bookCard);
                 console.log('book marcado como lido:', title);
-
-                // ------------- add no lidos ---------------------------
+               
                 myReadings.push({ title, authors, imageLinks });
                 localStorage.setItem('myReadings', JSON.stringify(myReadings));
                 console.log('myReadings salva no localStorage:', JSON.parse(localStorage.getItem('myReadings')));
-                //--------------------------------------------------------
+               
             });
         }
 
@@ -149,14 +140,14 @@ function showBooks(books) {
             bttnFavorite.innerHTML = '<img src="../assets/imgs/favoritado.png" alt="Favoritado" />';
         }
 
-        if (currentURL.includes('toRead.html') || currentURL.includes('favs.html') || currentURL.includes('read.html')) { // página de lidos
+        if (currentURL.includes('to-read.html') || currentURL.includes('favs.html') || currentURL.includes('read.html')) { // página de lidos
             const bttnDelete = document.createElement('button');
             bttnDelete.classList.add('delete-button');
             bttnDelete.textContent = 'Remover';
             bookCard.appendChild(bttnDelete);
 
             bttnDelete.addEventListener('click', function() {
-                if (currentURL.includes('toRead.html')) {
+                if (currentURL.includes('to-read.html')) {
                     myList = myList.filter(item => item.title !== title);
                     localStorage.setItem('myList', JSON.stringify(myList));
                 } else if (currentURL.includes('favs.html')) {
