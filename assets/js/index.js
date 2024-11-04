@@ -96,11 +96,10 @@ function showBooks(books) {
             const bookExist = myList.some(item => item.title === title);
             
             if (bookExist) {
-                alert('Este book já está na lista.');
+                alert('Este livro já está na lista.');
             } else {
                 myList.push({ title, authors, imageLinks });
                 localStorage.setItem('myList', JSON.stringify(myList));
-                console.log('myList salva no localStorage:', JSON.parse(localStorage.getItem('myList')));
             }
         });
 
@@ -112,7 +111,6 @@ function showBooks(books) {
             } else {
                 myFavList.push({ title, authors, imageLinks });
                 localStorage.setItem('myFavList', JSON.stringify(myFavList));
-                console.log('myFavList salva no localStorage:', JSON.parse(localStorage.getItem('myFavList')));
                 bttnFavorite.innerHTML = '<img src="../assets/imgs/favoritado.png" alt="Favoritado" />';
             }
         });
@@ -127,11 +125,9 @@ function showBooks(books) {
                 myList = myList.filter(item => item.title !== title);
                 localStorage.setItem('myList', JSON.stringify(myList));
                 containerResults.removeChild(bookCard);
-                console.log('book marcado como lido:', title);
                
                 myReadings.push({ title, authors, imageLinks });
                 localStorage.setItem('myReadings', JSON.stringify(myReadings));
-                console.log('myReadings salva no localStorage:', JSON.parse(localStorage.getItem('myReadings')));
                
             });
         }
@@ -159,7 +155,6 @@ function showBooks(books) {
                     localStorage.setItem('myFavList', JSON.stringify(myReadings));
                 }
                 containerResults.removeChild(bookCard);
-                console.log('book removido da lista:', title);
             });
         }
     });
