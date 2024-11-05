@@ -2,7 +2,7 @@
 
 
 ## Sobre o Projeto
-Bloom Shelf é um projeto em desenvolvimento para a disciplina de **Programação de Sítios Internet**, focado na integração da **API do Google Books** utilizando **JavaScript**. Os usuários podem:
+Bloom Shelf é um projeto desenvolvido para a disciplina de **Programação de Sítios Internet**, focado na integração da **API do Google Books** utilizando **JavaScript**. Os usuários podem:
 - Pesquisar livros
 - Organizar favoritos
 - Adicionar à lista de leitura
