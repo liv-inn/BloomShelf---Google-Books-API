@@ -3,6 +3,7 @@ let myList = JSON.parse(localStorage.getItem('myList')) || [];
 let myFavList = JSON.parse(localStorage.getItem('myFavList')) || [];
 let myReadings = JSON.parse(localStorage.getItem('myReadings')) || [];
 
+
 const currentURL = window.location.href;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -14,9 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
         showBooks(savedList);
     } else if (currentURL.includes('favs.html')) {
         showBooks(savedFavList);
-    } else if(currentURL.includes('read.html')) {
+    } 
+    else if(currentURL.includes('read.html')) {
         showBooks(savedMyReadings);
     }
+   
 });
 
 function fetchBooks(searchTerm) {
@@ -37,7 +40,7 @@ function fetchBooks(searchTerm) {
         .catch(error => console.error('Erro na requisição:', error));
 }
 
-document.getElementById('searchForm').addEventListener('submit', (event) => {
+document.getElementById('searchForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
     const searchQuery = document.querySelector('input[name="search"]').value;
@@ -72,14 +75,7 @@ function showBooks(books) {
 
         const bttnFavorite = document.createElement('button');
         bttnFavorite.classList.add('favorite-button');
-
-        
-        if (currentURL.includes('index.html')) {
-            bttnFavorite.innerHTML = '<img src="./assets/imgs/favoritar.png" alt="Favoritar" />'; 
-        } else {
-            bttnFavorite.innerHTML = '<img src="../assets/imgs/favoritar.png" alt="Favoritar" />'; 
-        }
-
+        bttnFavorite.innerHTML = '<img src="../assets/imgs/favoritar.png" alt="Favoritar" />';
         bookCard.appendChild(bttnFavorite);
 
         const bookTitle = document.createElement('p');
@@ -92,9 +88,11 @@ function showBooks(books) {
         bookAuthor.textContent = `Autor(es): ${authors ? authors.join(', ') : 'Desconhecido'}`;
         bookCard.appendChild(bookAuthor);
 
+
         containerResults.appendChild(bookCard);
 
-        bttnAdd.addEventListener('click', () => {
+
+        bttnAdd.addEventListener('click', function() {
             const bookExist = myList.some(item => item.title === title);
             
             if (bookExist) {
@@ -105,7 +103,7 @@ function showBooks(books) {
             }
         });
 
-        bttnFavorite.addEventListener('click', () => {
+        bttnFavorite.addEventListener('click', function() {
             const bookFavorite = myFavList.some(item => item.title === title);
             
             if (bookFavorite) {
@@ -113,13 +111,7 @@ function showBooks(books) {
             } else {
                 myFavList.push({ title, authors, imageLinks });
                 localStorage.setItem('myFavList', JSON.stringify(myFavList));
-                
-               
-                if (currentURL.includes('index.html')) {
-                    bttnFavorite.innerHTML = '<img src="./assets/imgs/favoritado.png" alt="Favoritado" />';
-                } else {
-                    bttnFavorite.innerHTML = '<img src="../assets/imgs/favoritado.png" alt="Favoritado" />';
-                }
+                bttnFavorite.innerHTML = '<img src="../assets/imgs/favoritado.png" alt="Favoritado" />';
             }
         });
 
@@ -129,34 +121,36 @@ function showBooks(books) {
             bttnMarkAsRead.textContent = 'Marcar como lido';
             bookCard.appendChild(bttnMarkAsRead);
 
-            bttnMarkAsRead.addEventListener('click', () => {
+            bttnMarkAsRead.addEventListener('click', function() {
                 myList = myList.filter(item => item.title !== title);
                 localStorage.setItem('myList', JSON.stringify(myList));
                 containerResults.removeChild(bookCard);
-
+               
                 myReadings.push({ title, authors, imageLinks });
                 localStorage.setItem('myReadings', JSON.stringify(myReadings));
+               
             });
         }
 
-        if (currentURL.includes('favs.html')) {
+        if (currentURL.includes('favs.html')){
             bttnFavorite.innerHTML = '<img src="../assets/imgs/favoritado.png" alt="Favoritado" />';
         }
 
-        if (currentURL.includes('to-read.html') || currentURL.includes('favs.html') || currentURL.includes('read.html')) { 
+        if (currentURL.includes('to-read.html') || currentURL.includes('favs.html') || currentURL.includes('read.html')) { // página de lidos
             const bttnDelete = document.createElement('button');
             bttnDelete.classList.add('delete-button');
             bttnDelete.textContent = 'Remover';
             bookCard.appendChild(bttnDelete);
 
-            bttnDelete.addEventListener('click', () => {
+            bttnDelete.addEventListener('click', function() {
                 if (currentURL.includes('to-read.html')) {
                     myList = myList.filter(item => item.title !== title);
                     localStorage.setItem('myList', JSON.stringify(myList));
                 } else if (currentURL.includes('favs.html')) {
                     myFavList = myFavList.filter(item => item.title !== title);
                     localStorage.setItem('myFavList', JSON.stringify(myFavList));
-                } else if(currentURL.includes('read.html')){
+                } // tirar do cache de lidos
+                else if(currentURL.includes('read.html')){
                     myReadings = myReadings.filter(item => item.title !== title);
                     localStorage.setItem('myFavList', JSON.stringify(myReadings));
                 }
@@ -186,6 +180,6 @@ function fetchRecommendations() {
         .catch(error => console.error('Erro ao buscar recomendações:', error));
 }
 
-document.getElementById('recomendations').addEventListener('click', () => {
+document.getElementById('recomendations').addEventListener('click', function() {
     fetchRecommendations();
 });
