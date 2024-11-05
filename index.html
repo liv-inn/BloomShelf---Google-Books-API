@@ -44,29 +44,6 @@
     </main>
 
     <script src="./assets/js/index.js"></script>
-    <script>
-        
-        function createFavoriteButton(bookCard, title, authors, imageLinks) {
-            const bttnFavorite = document.createElement('button');
-            bttnFavorite.classList.add('favorite-button');
-            bttnFavorite.innerHTML = '<img src="./assets/imgs/favoritar.png" alt="Favoritar" />'; 
-            bookCard.appendChild(bttnFavorite);
-
-            const myFavList = JSON.parse(localStorage.getItem('myFavList')) || [];
-            bttnFavorite.addEventListener('click', function() {
-                const bookFavorite = myFavList.some(item => item.title === title);
-                
-                if (bookFavorite) {
-                    alert('Este livro já está na lista de favoritos.');
-                } else {
-                    myFavList.push({ title, authors, imageLinks });
-                    localStorage.setItem('myFavList', JSON.stringify(myFavList));
-                    bttnFavorite.innerHTML = '<img src="./assets/imgs/favoritado.png" alt="Favoritado" />'; 
-                }
-            });
-        }
-
-
-    </script>
+   
 </body>
 </html>

@@ -15,19 +15,18 @@ document.addEventListener('DOMContentLoaded', () => {
         showBooks(savedList);
     } else if (currentURL.includes('favs.html')) {
         showBooks(savedFavList);
-    } 
-    else if(currentURL.includes('read.html')) {
+    } else if(currentURL.includes('read.html')) {
         showBooks(savedMyReadings);
     }
    
 });
 
 function fetchBooks(searchTerm) {
-    const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(searchTerm)}&key=${API_KEY}`;
+    const url = https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(searchTerm)}&key=${API_KEY};
 
     fetch(url)
         .then(response => {
-            if (!response.ok) throw new Error(`Erro: ${response.status}`);
+            if (!response.ok) throw new Error(Erro: ${response.status});
             return response.json();
         })
         .then(data => {
@@ -40,7 +39,7 @@ function fetchBooks(searchTerm) {
         .catch(error => console.error('Erro na requisição:', error));
 }
 
-document.getElementById('searchForm').addEventListener('submit', function(event) {
+document.getElementById('searchForm').addEventListener('submit', (event) => {
     event.preventDefault();
 
     const searchQuery = document.querySelector('input[name="search"]').value;
@@ -65,7 +64,7 @@ function showBooks(books) {
         const bookImage = document.createElement('img');
         bookImage.classList.add('img-book');
         bookImage.src = imageLinks ? imageLinks.thumbnail : '../assets/imgs/erro-img.png';
-        bookImage.alt = `Capa do book ${title || 'Desconhecido'}`;
+        bookImage.alt = Capa do book ${title || 'Desconhecido'};
         bookCard.appendChild(bookImage);
 
         const bttnAdd = document.createElement('button');
@@ -75,7 +74,7 @@ function showBooks(books) {
 
         const bttnFavorite = document.createElement('button');
         bttnFavorite.classList.add('favorite-button');
-        bttnFavorite.innerHTML = '<img src="../assets/imgs/favoritar.png" alt="Favoritar" />';
+        bttnFavorite.innerHTML = '<img src="../imgs/favoritar.png" alt="Favoritar" />';
         bookCard.appendChild(bttnFavorite);
 
         const bookTitle = document.createElement('p');
@@ -85,14 +84,14 @@ function showBooks(books) {
 
         const bookAuthor = document.createElement('p');
         bookAuthor.classList.add('nome-autor');
-        bookAuthor.textContent = `Autor(es): ${authors ? authors.join(', ') : 'Desconhecido'}`;
+        bookAuthor.textContent = Autor(es): ${authors ? authors.join(', ') : 'Desconhecido'};
         bookCard.appendChild(bookAuthor);
 
 
         containerResults.appendChild(bookCard);
 
 
-        bttnAdd.addEventListener('click', function() {
+        bttnAdd.addEventListener('click', () => {
             const bookExist = myList.some(item => item.title === title);
             
             if (bookExist) {
@@ -103,7 +102,7 @@ function showBooks(books) {
             }
         });
 
-        bttnFavorite.addEventListener('click', function() {
+        bttnFavorite.addEventListener('click', () => {
             const bookFavorite = myFavList.some(item => item.title === title);
             
             if (bookFavorite) {
@@ -111,7 +110,7 @@ function showBooks(books) {
             } else {
                 myFavList.push({ title, authors, imageLinks });
                 localStorage.setItem('myFavList', JSON.stringify(myFavList));
-                bttnFavorite.innerHTML = '<img src="../imgs/favoritar.png" alt="Favoritar" />';
+                bttnFavorite.innerHTML = '<img src="../assets/imgs/favoritado.png" alt="Favoritado" />';
             }
         });
 
@@ -121,7 +120,7 @@ function showBooks(books) {
             bttnMarkAsRead.textContent = 'Marcar como lido';
             bookCard.appendChild(bttnMarkAsRead);
 
-            bttnMarkAsRead.addEventListener('click', function() {
+            bttnMarkAsRead.addEventListener('click', () => {
                 myList = myList.filter(item => item.title !== title);
                 localStorage.setItem('myList', JSON.stringify(myList));
                 containerResults.removeChild(bookCard);
@@ -136,21 +135,20 @@ function showBooks(books) {
             bttnFavorite.innerHTML = '<img src="../imgs/favoritado.png" alt="Favoritado" />';
         }
 
-        if (currentURL.includes('to-read.html') || currentURL.includes('favs.html') || currentURL.includes('read.html')) { // página de lidos
+        if (currentURL.includes('to-read.html') || currentURL.includes('favs.html') || currentURL.includes('read.html')) { 
             const bttnDelete = document.createElement('button');
             bttnDelete.classList.add('delete-button');
             bttnDelete.textContent = 'Remover';
             bookCard.appendChild(bttnDelete);
 
-            bttnDelete.addEventListener('click', function() {
+            bttnDelete.addEventListener('click', () => {
                 if (currentURL.includes('to-read.html')) {
                     myList = myList.filter(item => item.title !== title);
                     localStorage.setItem('myList', JSON.stringify(myList));
                 } else if (currentURL.includes('favs.html')) {
                     myFavList = myFavList.filter(item => item.title !== title);
                     localStorage.setItem('myFavList', JSON.stringify(myFavList));
-                } // tirar do cache de lidos
-                else if(currentURL.includes('read.html')){
+                } else if(currentURL.includes('read.html')){
                     myReadings = myReadings.filter(item => item.title !== title);
                     localStorage.setItem('myFavList', JSON.stringify(myReadings));
                 }
@@ -163,7 +161,7 @@ function showBooks(books) {
 function fetchRecommendations() {
     const recommendedTopics = ['romance', 'fantasia', 'humor', 'história'];
     const promises = recommendedTopics.map(topic => {
-        const url = `https://www.googleapis.com/books/v1/volumes?q=subject:${topic}&key=${API_KEY}`;
+        const url = https://www.googleapis.com/books/v1/volumes?q=subject:${topic}&key=${API_KEY};
         return fetch(url).then(response => response.json());
     });
 
@@ -180,6 +178,6 @@ function fetchRecommendations() {
         .catch(error => console.error('Erro ao buscar recomendações:', error));
 }
 
-document.getElementById('recomendations').addEventListener('click', function() {
+document.getElementById('recomendations').addEventListener('click', () => {
     fetchRecommendations();
 });
