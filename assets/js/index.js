@@ -3,7 +3,6 @@ let myList = JSON.parse(localStorage.getItem('myList')) || [];
 let myFavList = JSON.parse(localStorage.getItem('myFavList')) || [];
 let myReadings = JSON.parse(localStorage.getItem('myReadings')) || [];
 
-
 const currentURL = window.location.href;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -18,15 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if(currentURL.includes('read.html')) {
         showBooks(savedMyReadings);
     }
-   
 });
 
 function fetchBooks(searchTerm) {
-    const url = https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(searchTerm)}&key=${API_KEY};
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(searchTerm)}&key=${API_KEY}`;
 
     fetch(url)
         .then(response => {
-            if (!response.ok) throw new Error(Erro: ${response.status});
+            if (!response.ok) throw new Error(`Erro: ${response.status}`);
             return response.json();
         })
         .then(data => {
@@ -64,7 +62,7 @@ function showBooks(books) {
         const bookImage = document.createElement('img');
         bookImage.classList.add('img-book');
         bookImage.src = imageLinks ? imageLinks.thumbnail : '../assets/imgs/erro-img.png';
-        bookImage.alt = Capa do book ${title || 'Desconhecido'};
+        bookImage.alt = `Capa do book ${title || 'Desconhecido'}`;
         bookCard.appendChild(bookImage);
 
         const bttnAdd = document.createElement('button');
@@ -74,7 +72,14 @@ function showBooks(books) {
 
         const bttnFavorite = document.createElement('button');
         bttnFavorite.classList.add('favorite-button');
-        bttnFavorite.innerHTML = '<img src="../imgs/favoritar.png" alt="Favoritar" />';
+
+        // Lógica para definir o caminho da imagem de acordo com a URL
+        if (currentURL.includes('index.html')) {
+            bttnFavorite.innerHTML = '<img src="./assets/imgs/favoritar.png" alt="Favoritar" />'; // Caminho relativo para index.html
+        } else {
+            bttnFavorite.innerHTML = '<img src="../assets/imgs/favoritar.png" alt="Favoritar" />'; // Caminho relativo para outras páginas
+        }
+
         bookCard.appendChild(bttnFavorite);
 
         const bookTitle = document.createElement('p');
@@ -84,12 +89,10 @@ function showBooks(books) {
 
         const bookAuthor = document.createElement('p');
         bookAuthor.classList.add('nome-autor');
-        bookAuthor.textContent = Autor(es): ${authors ? authors.join(', ') : 'Desconhecido'};
+        bookAuthor.textContent = `Autor(es): ${authors ? authors.join(', ') : 'Desconhecido'}`;
         bookCard.appendChild(bookAuthor);
 
-
         containerResults.appendChild(bookCard);
-
 
         bttnAdd.addEventListener('click', () => {
             const bookExist = myList.some(item => item.title === title);
@@ -110,7 +113,13 @@ function showBooks(books) {
             } else {
                 myFavList.push({ title, authors, imageLinks });
                 localStorage.setItem('myFavList', JSON.stringify(myFavList));
-                bttnFavorite.innerHTML = '<img src="../assets/imgs/favoritado.png" alt="Favoritado" />';
+                
+                // Lógica para atualizar a imagem do botão para "favoritado"
+                if (currentURL.includes('index.html')) {
+                    bttnFavorite.innerHTML = '<img src="./assets/imgs/favoritado.png" alt="Favoritado" />';
+                } else {
+                    bttnFavorite.innerHTML = '<img src="../assets/imgs/favoritado.png" alt="Favoritado" />';
+                }
             }
         });
 
@@ -124,15 +133,14 @@ function showBooks(books) {
                 myList = myList.filter(item => item.title !== title);
                 localStorage.setItem('myList', JSON.stringify(myList));
                 containerResults.removeChild(bookCard);
-               
+
                 myReadings.push({ title, authors, imageLinks });
                 localStorage.setItem('myReadings', JSON.stringify(myReadings));
-               
             });
         }
 
-        if (currentURL.includes('favs.html')){
-            bttnFavorite.innerHTML = '<img src="../imgs/favoritado.png" alt="Favoritado" />';
+        if (currentURL.includes('favs.html')) {
+            bttnFavorite.innerHTML = '<img src="../assets/imgs/favoritado.png" alt="Favoritado" />';
         }
 
         if (currentURL.includes('to-read.html') || currentURL.includes('favs.html') || currentURL.includes('read.html')) { 
@@ -161,7 +169,7 @@ function showBooks(books) {
 function fetchRecommendations() {
     const recommendedTopics = ['romance', 'fantasia', 'humor', 'história'];
     const promises = recommendedTopics.map(topic => {
-        const url = https://www.googleapis.com/books/v1/volumes?q=subject:${topic}&key=${API_KEY};
+        const url = `https://www.googleapis.com/books/v1/volumes?q=subject:${topic}&key=${API_KEY}`;
         return fetch(url).then(response => response.json());
     });
 
