@@ -13,6 +13,6 @@ Este projeto visa aplicar conhecimentos de desenvolvimento web, manipulação de
 
 ## Tecnologias Utilizadas
 
-- ![HTML5 Logo](https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg) **HTML5 e CSS3**: Estrutura e estilização.
-- ![JavaScript Logo](https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png) **JavaScript (ES6)**: Interatividade no front-end.
+- <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" alt="HTML5 Logo" width="20"> **HTML5 e CSS3**: Estrutura e estilização.
+- <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JavaScript Logo" width="20"> **JavaScript (ES6)**: Interatividade no front-end.
 - **Google Books API**: Integração para busca de informações de livros.
