@@ -63,7 +63,7 @@ function showBooks(books) {
 
         const bookImage = document.createElement('img');
         bookImage.classList.add('img-book');
-        bookImage.src = imageLinks ? imageLinks.thumbnail : '../assets/imgs/erro-img.png';
+        bookImage.src = imageLinks ? imageLinks.thumbnail : './assets/imgs/erro-img.png';
         bookImage.alt = `Capa do book ${title || 'Desconhecido'}`;
         bookCard.appendChild(bookImage);
 
@@ -74,7 +74,7 @@ function showBooks(books) {
 
         const bttnFavorite = document.createElement('button');
         bttnFavorite.classList.add('favorite-button');
-        bttnFavorite.innerHTML = '<img src="../imgs/favoritar.png" alt="Favoritar" />';
+        bttnFavorite.innerHTML = '<img src="./assets/imgs/favoritar.png" alt="Favoritar" />';
         bookCard.appendChild(bttnFavorite);
 
         const bookTitle = document.createElement('p');
@@ -110,7 +110,7 @@ function showBooks(books) {
             } else {
                 myFavList.push({ title, authors, imageLinks });
                 localStorage.setItem('myFavList', JSON.stringify(myFavList));
-                bttnFavorite.innerHTML = '<img src="../assets/imgs/favoritado.png" alt="Favoritado" />';
+                bttnFavorite.innerHTML = '<img src="./assets/imgs/favoritado.png" alt="Favoritado" />';
             }
         });
 
