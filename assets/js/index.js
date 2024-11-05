@@ -75,7 +75,7 @@ function showBooks(books) {
 
         const bttnFavorite = document.createElement('button');
         bttnFavorite.classList.add('favorite-button');
-        bttnFavorite.innerHTML = '<img src="../assets/imgs/favoritar.png" alt="Favoritar" />';
+        bttnFavorite.innerHTML = '<img src="../imgs/favoritar.png" alt="Favoritar" />';
         bookCard.appendChild(bttnFavorite);
 
         const bookTitle = document.createElement('p');
@@ -133,7 +133,7 @@ function showBooks(books) {
         }
 
         if (currentURL.includes('favs.html')){
-            bttnFavorite.innerHTML = '<img src="../assets/imgs/favoritado.png" alt="Favoritado" />';
+            bttnFavorite.innerHTML = '<img src="../imgs/favoritado.png" alt="Favoritado" />';
         }
 
         if (currentURL.includes('to-read.html') || currentURL.includes('favs.html') || currentURL.includes('read.html')) { // página de lidos
