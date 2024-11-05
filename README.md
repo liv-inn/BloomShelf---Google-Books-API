@@ -1,4 +1,4 @@
-# <img src="./assets/imgs/logo.png" alt="Logo do Bloom Shelf" width="60"> Bloom Shelf
+# <img src="./assets/imgs/favicon.png" alt="Logo do Bloom Shelf" width="60"> Bloom Shelf
 
 
 ## Sobre o Projeto
