@@ -73,12 +73,11 @@ function showBooks(books) {
         const bttnFavorite = document.createElement('button');
         bttnFavorite.classList.add('favorite-button');
 
-        // Lógica para definir o caminho da imagem de acordo com a URL
+        
         if (currentURL.includes('index.html')) {
-            bttnFavorite.innerHTML = '<img src="./assets/imgs/favoritar.png" alt="Favoritar" />'; // Caminho relativo para index.html
+            bttnFavorite.innerHTML = '<img src="./assets/imgs/favoritar.png" alt="Favoritar" />'; 
         } else {
-            bttnFavorite.innerHTML = '<img src="../assets/imgs/favoritar.png" alt="Favoritar" />'; // Caminho relativo para outras páginas
-        }
+            bttnFavorite.innerHTML = '<img src="../assets/imgs/favoritar.png" alt="Favoritar" />'; 
 
         bookCard.appendChild(bttnFavorite);
 
@@ -114,7 +113,7 @@ function showBooks(books) {
                 myFavList.push({ title, authors, imageLinks });
                 localStorage.setItem('myFavList', JSON.stringify(myFavList));
                 
-                // Lógica para atualizar a imagem do botão para "favoritado"
+               
                 if (currentURL.includes('index.html')) {
                     bttnFavorite.innerHTML = '<img src="./assets/imgs/favoritado.png" alt="Favoritado" />';
                 } else {
