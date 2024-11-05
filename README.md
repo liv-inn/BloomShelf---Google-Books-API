@@ -1,4 +1,5 @@
-# ![Logo do Bloom Shelf](./assets/imgs/favicon.png) Bloom Shelf
+# <img src="./assets/imgs/logo.png" alt="Logo do Bloom Shelf" width="60"> Bloom Shelf
+
 
 ## Sobre o Projeto
 Bloom Shelf é um projeto em desenvolvimento para a disciplina de **Programação de Sítios Internet**, focado na integração da **API do Google Books** utilizando **JavaScript**. Os usuários podem:
@@ -9,7 +10,6 @@ Bloom Shelf é um projeto em desenvolvimento para a disciplina de **Programaçã
 - Acessar recomendações
 
 Este projeto visa aplicar conhecimentos de desenvolvimento web, manipulação de APIs e gerenciamento de dados no front-end.
-### **Site hospedado em:** https://liv-inn.github.io/BloomShelf---Google-Books-API/
 
 ## Tecnologias Utilizadas
 
