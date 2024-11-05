@@ -78,6 +78,7 @@ function showBooks(books) {
             bttnFavorite.innerHTML = '<img src="./assets/imgs/favoritar.png" alt="Favoritar" />'; 
         } else {
             bttnFavorite.innerHTML = '<img src="../assets/imgs/favoritar.png" alt="Favoritar" />'; 
+        }
 
         bookCard.appendChild(bttnFavorite);
 
