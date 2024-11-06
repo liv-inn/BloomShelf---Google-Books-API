@@ -1,4 +1,4 @@
-const API_KEY = 'AIzaSyA2eEhMrItpWYVgmDjMLxZJEV7paDjL1HA';
+const API_KEY = 'AIzaSyA5Ov9tMJqq6hfUdc9G_0a2CtzWyGeCahk';
 let myList = JSON.parse(localStorage.getItem('myList')) || [];
 let myFavList = JSON.parse(localStorage.getItem('myFavList')) || [];
 let myReadings = JSON.parse(localStorage.getItem('myReadings')) || [];
@@ -136,7 +136,7 @@ function showBooks(books) {
             bttnFavorite.innerHTML = '<img src="../assets/imgs/favoritado.png" alt="Favoritado" />';
         }
 
-        if (currentURL.includes('to-read.html') || currentURL.includes('favs.html') || currentURL.includes('read.html')) { // página de lidos
+        if (currentURL.includes('to-read.html') || currentURL.includes('favs.html') || currentURL.includes('read.html')) {
             const bttnDelete = document.createElement('button');
             bttnDelete.classList.add('delete-button');
             bttnDelete.textContent = 'Remover';
@@ -152,7 +152,7 @@ function showBooks(books) {
                 } // tirar do cache de lidos
                 else if(currentURL.includes('read.html')){
                     myReadings = myReadings.filter(item => item.title !== title);
-                    localStorage.setItem('myFavList', JSON.stringify(myReadings));
+                    localStorage.setItem('myReadings', JSON.stringify(myReadings));
                 }
                 containerResults.removeChild(bookCard);
             });

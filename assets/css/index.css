@@ -209,13 +209,7 @@ main{
 
 }
 
-.myList{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
 
-}
 
 .myList > p{
     font-size: 2rem;
@@ -254,4 +248,14 @@ a{
     margin: 10px;
     box-shadow: 0px 4px 8px #0000001a;
     border: 1px solid #401d123f;
+}
+button:hover{
+    background-color: #401D12;
+    color: #E8DDD7;
+
+}
+
+a>button:hover{
+    color: #E8DDD7;
+    background-color: #401D12;
 }
