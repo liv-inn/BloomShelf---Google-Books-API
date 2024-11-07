@@ -223,9 +223,9 @@ main{
 }
 
 .nome-img {
-    background-color: #f4f4f4;
+    background-color: #fff;
     padding: 10px;
-    border-radius: 8px;
+    border-radius: 10px;
     text-align: center;
     overflow: hidden;
 }
