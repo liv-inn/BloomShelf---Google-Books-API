@@ -1,38 +1,41 @@
 import { FaStar } from "react-icons/fa";
 
 function CardBook({ book, onAddToFavorites }) {
+  function truncateText(text, maxLength) {
+    if (!text) return "Sem descrição";
+    return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
+  }
+
   return (
-    <div className="bg-white  rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow w-56 h-[380px] flex flex-col">
-      {book.thumbnail && (
+    <li className="rounded-lg text-gray-700 text-sm bg-gray-100 flex flex-col items-center cursor-pointer hover:shadow-md transition-shadow h-60 overflow-hidden">
+      {book.volumeInfo.imageLinks?.thumbnail && (
         <img
-          src={book.thumbnail}
-          alt={book.title}
-          className="w-full h-48 object-cover"
+          src={book.volumeInfo.imageLinks.thumbnail}
+          alt={book.volumeInfo.title}
+          className="mb-2 w-full h-32 object-cover rounded-t-lg"
         />
       )}
 
-      <div className="flex flex-col flex-1 p-3">
-        <h3 className="font-semibold text-gray-800 text-sm mb-1 line-clamp-2">
-          {book.title}
-        </h3>
-        <p className="text-gray-600 text-xs mb-2 line-clamp-1">
-          by {book.authors.join(", ")}
-        </p>
+      <h3 className="font-semibold text-center px-2">
+        {truncateText(book.volumeInfo.title, 50)}
+      </h3>
 
-        <p className="text-gray-700 text-xs flex-1 line-clamp-3 ">
-          {book.description.length > 120
-            ? book.description.substring(0, 120) + "..."
-            : book.description}
-        </p>
+      <span className="text-center px-2 mb-2">
+        {truncateText(
+          book.volumeInfo.authors
+            ? book.volumeInfo.authors.join(", ")
+            : "Unknown Author",
+          30
+        )}
+      </span>
 
-        <button
-          onClick={() => onAddToFavorites(book)}
-          className="self-end bg-pink-700 hover:bg-pink-400 text-white px-3 py-1.5 rounded-full text-sm transition-colors flex items-center gap-1"
-        >
-          <FaStar className="text-sm" /> Fav
-        </button>
-      </div>
-    </div>
+      <button
+        onClick={() => onAddToFavorites && onAddToFavorites(book)}
+        className="text-yellow-500 hover:text-yellow-700 mt-auto mb-2"
+      >
+        <FaStar />
+      </button>
+    </li>
   );
 }
 

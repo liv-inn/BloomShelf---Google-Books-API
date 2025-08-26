@@ -1,51 +1,37 @@
-const API_KEY = import.meta.env.VITE_API_KEY;;
+const API_KEY = import.meta.env.VITE_API_KEY;
 
-let myFavList = [];
+export async function getBooks(searchTerm) {
+  try {
+    const API_BASE_URL = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(
+      searchTerm
+    )}&key=${API_KEY}`;
 
-function fetchBooks(searchTerm) {
-  const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(
-    searchTerm
-  )}&key=${API_KEY}`;
-
-  return fetch(url)
-    .then((response) => {
-      if (!response.ok) throw new Error("Network response was not ok");
-      return response.json();
-    })
-    .then((data) => {
-      if (data.items) {
-        return data.items.map((item) => ({
-          id: item.id,
-          title: item.volumeInfo.title,
-          authors: item.volumeInfo.authors || ["Unknown Author"],
-          description:
-            item.volumeInfo.description || "No description available",
-          thumbnail: item.volumeInfo.imageLinks
-            ? item.volumeInfo.imageLinks.thumbnail
-            : "",
-        }));
-      } else {
-        return [];
-      }
-    });
-}
-
-function handleFavClick(book) {
-  const bookFav = myFavList.some((item) => item.id === book.id);
-  if (bookFav) {
-    alert("This book is already in your favorites!");
-    return;
+    const response = await fetch(API_BASE_URL);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    console.log(data);
+    return data.items || [];
+  } catch (error) {
+    console.error("Error fetching books:", error);
+    return [];
   }
-  myFavList.push(book);
-
 }
 
-function getFavorites() {
-  return myFavList;
+export async function getRecommendations() {
+  try {
+    const response = await fetch(
+      `https://www.googleapis.com/books/v1/volumes?q=subject:fiction&key=${API_KEY}`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    console.log(data);
+    return data.items || [];
+  } catch (error) {
+    console.error("Error fetching recommendations:", error);
+    return [];
+  }
 }
-
-function removeFavorite(bookId) {
-  myFavList = myFavList.filter((book) => book.id !== bookId);
-}
-
-export { fetchBooks, handleFavClick, getFavorites, removeFavorite };
