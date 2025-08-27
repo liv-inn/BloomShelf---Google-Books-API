@@ -65,16 +65,14 @@ function Home() {
   }, [activeTab]);
 
   return (
-    <div className="flex flex-col justify-center mt-2 p-6 gap-10 px-6 text-center">
+    <div className="flex flex-col justify-center mt-2 p-4 gap-6  px-2 text-center">
       <Logo />
+     <span className="text-2xl font-semibold text-[#353535]">
+      Hello, {name}
+     </span>
 
-      <span className="text-2xl text-[#ff05c1] text-left">
-        Hello, <br />
-        <span className="font-bold text-3xl">{name}!</span>
-      </span>
-
-      <span className="text-sm text-[#440263] text-left">
-        <strong>Let's find your next favorite book</strong>
+      <span className="text-sm text-[#353535]">
+        <strong>Let's find your next favorite book.</strong>
         <br />
         Which story will bloom for you today?
       </span>

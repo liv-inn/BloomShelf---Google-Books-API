@@ -2,39 +2,45 @@ import { FaStar } from "react-icons/fa";
 
 function CardBook({ book, onAddToFavorites }) {
   function truncateText(text, maxLength) {
-    if (!text) return "Sem descrição";
+    if (!text) return "No title available";
     return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
   }
 
+  const { title, authors, imageLinks } = book.volumeInfo;
+  const authorText = authors ? authors.join(", ") : "Unknown author";
+
   return (
-    <li className="rounded-lg text-gray-700 text-sm bg-gray-100 flex flex-col items-center cursor-pointer hover:shadow-md transition-shadow h-60 overflow-hidden">
-      {book.volumeInfo.imageLinks?.thumbnail && (
+    <li className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out p-4 flex flex-col items-center w-full max-w-[220px] mx-auto">
+      
+     
+      <div className="w-40 h-56 mb-4">
         <img
-          src={book.volumeInfo.imageLinks.thumbnail}
-          alt={book.volumeInfo.title}
-          className="mb-2 w-full h-32 object-cover rounded-t-lg"
+          src={imageLinks?.thumbnail || "https://via.placeholder.com/160x224"}
+          alt={`Capa do livro ${title}`}
+          className="w-full h-full object-cover rounded-md shadow-md"
         />
-      )}
+      </div>
 
-      <h3 className="font-semibold text-center px-2">
-        {truncateText(book.volumeInfo.title, 50)}
-      </h3>
-
-      <span className="text-center px-2 mb-2">
-        {truncateText(
-          book.volumeInfo.authors
-            ? book.volumeInfo.authors.join(", ")
-            : "Unknown Author",
-          30
-        )}
-      </span>
+      <div className="text-center flex-grow">
+        <h3 className="text-base font-bold text-slate-800 leading-tight">
+          {truncateText(title, 40)}
+        </h3>
+        <p className="text-xs text-slate-500 mt-1">
+          {truncateText(authorText, 30)}
+        </p>
+      </div>
 
       <button
-        onClick={() => onAddToFavorites && onAddToFavorites(book)}
-        className="text-yellow-500 hover:text-yellow-700 mt-auto mb-2"
+        onClick={(e) => {
+            e.stopPropagation(); 
+            onAddToFavorites(book);
+        }}
+        className="text-gray-300 hover:text-yellow-400 transition-colors duration-200 mt-3"
+        aria-label="Add to favorites"
       >
-        <FaStar />
+        <FaStar size={24} />
       </button>
+
     </li>
   );
 }
